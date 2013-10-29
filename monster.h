@@ -26,6 +26,7 @@ ME_HIT_BY_PLAYER,   // We shot or hit them
 ME_RUN,             // For hit-and-run monsters; we're running for a bit;
 ME_BOULDERING,      // Monster is moving over rubble
 ME_BOUNCED,
+ME_NEAR_PLAYER,
 NUM_MONSTER_EFFECTS
 };
 
@@ -120,7 +121,12 @@ class monster {
  point wander_next(game *g);
  void hit_player(game *g, player &p, bool can_grab = true);
  int calc_movecost(game *g, int x1, int y1, int x2, int y2);
-
+ /**
+  * "Macro" to call will_reach to areas near/at the player, as to alert the player 
+  * based on a perception check. 
+  *  We dont wear blindfolds when we build do we?
+  */
+ int nearing_player(game *g , player &p); 
  /**
   * Attempt to move to (x,y).
   *
